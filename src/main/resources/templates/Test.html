@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>各个功能的测试</title>
+
+    <script type="application/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script>
+        //统一使用ajax与后端交互
+        //页面放在templates不能直接访问，需要后台跳转，如Test.html,要访问http://localhost:8080/templates/Test。
+        //页面放在static可以直接访问 //如static中的index.html，直接可访问：http://localhost:8080/index.html
+
+        function LoginFun(user, id, password){  //user:"学生"、"教师"、"管理员"
+            $.ajax({
+                type: "POST",   //我都设为POST
+                url: "/templates/Login",
+                data: JSON.stringify({"id":id, "password":password, "user" : user}),  //请使用JSON.stringify序列化
+                contentType : "application/json",
+                async:false,
+                dataType: "json",
+                success: function (data) {
+                   // alert(data);
+                    alert(JSON.stringify(data));  //请使用JSON.stringify()解析
+                },
+                error: function (data) {
+                    alert(JSON.stringify(data));
+                }
+            });
+        }
+        function selectStu(id) {
+            $.ajax({
+                type: "POST",
+                url: "/templates/selectStudent",
+                data: JSON.stringify({"id":id}),  //请使用JSON.stringify序列化
+                contentType : "application/json",
+                async:false,
+                dataType: "json",
+                success: function (data) {
+                    // alert(data);
+                    alert(JSON.stringify(data));  //请使用JSON.stringify()解析
+                },
+                error: function (data) {
+                    alert(JSON.stringify(data));
+                }
+            });
+        }
+        function dStu(id) {
+            $.ajax({
+                type: "POST",
+                url: "/templates/deleteStudent", //请把html放置在templates
+                data: JSON.stringify({"id":id}),  //请使用JSON.stringify序列化
+                contentType : "application/json",
+                async:false,
+                dataType: "json",
+                success: function (data) {
+                    // alert(data);
+                    alert(JSON.stringify(data));  //请使用JSON.stringify()解析
+                },
+                error: function (data) {
+                    alert(JSON.stringify(data));
+                }
+            });
+        }
+        function iStu() {
+            $.ajax({
+                type: "POST",
+                url: "/templates/insertStudent", //请把html放置在templates
+                data: JSON.stringify({"sid":"1234","sname":"chen","password":"123" }),  //对应字段名，请使用JSON.stringify序列化
+                contentType : "application/json",
+                async:false,
+                dataType: "json",
+                success: function (data) {
+                    // alert(data);
+                    alert(JSON.stringify(data));  //请使用JSON.stringify()解析
+                },
+                error: function (data) {
+                    alert(JSON.stringify(data));
+                }
+            });
+        }
+        function uStu() {
+            $.ajax({
+                type: "POST",
+                url: "/templates/updateStudent", //请把html放置在templates
+                data: JSON.stringify({"sid":"1234","sname":"chen","password":"1234","phone":"123456789" }),  //id唯一不能修改。对应字段名，请使用JSON.stringify序列化
+                contentType : "application/json",
+                async:false,
+                dataType: "json",
+                success: function (data) {
+                    // alert(data);
+                    alert(JSON.stringify(data));  //请使用JSON.stringify()解析
+                },
+                error: function (data) {
+                    alert(JSON.stringify(data));
+                }
+            });
+        }
+        function saChoi() {
+            $.ajax({
+                type: "POST",
+                url: "/templates/selectAllChoiceQuestion", //请把html放置在templates
+                data: {},  //请使用JSON.stringify序列化
+                contentType : "application/json",
+                async:false,
+                dataType: "json",
+                success: function (data) {
+                    // alert(data);
+                    alert(JSON.stringify(data));  //请使用JSON.stringify()解析
+                },
+                error: function (data) {
+                    alert(JSON.stringify(data));
+                }
+            });
+        }
+        function saNChoi(num) {;
+            $.ajax({
+                type: "POST",
+                url: "/templates/selectChoiceQuestionAt", //请把html放置在templates
+                data: JSON.stringify({"number":num}),  //一定要number,请使用JSON.stringify序列化
+                contentType : "application/json",
+                async:false,
+                dataType: "json",
+                success: function (data) {
+                    // alert(data);
+                    alert(JSON.stringify(data));  //请使用JSON.stringify()解析
+                },
+                error: function (data) {
+                    alert(JSON.stringify(data));
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <button onclick="LoginFun('学生','123','123')">学生登陆测试</button>
+    <button onclick="LoginFun('教师','123','123')">教师登陆测试</button>
+    <button onclick="selectStu('123')">学生单条查询测试</button>
+    <button onclick="dStu('12')">学生单条删除测试</button>
+    <button onclick="iStu()">学生单条插入测试</button>
+    <button onclick="uStu()">学生单条更新测试</button>
+    <button onclick="saChoi()">选择题查询所有测试</button>
+    <button onclick="saNChoi('10')">选择题随机n条查询测试(数据库题数不够)</button>
+    <button onclick="saNChoi('5')">选择题随机n条查询测试</button>
+<a href="/index.html">跳转测试</a>
+
+</body>
+</html>
