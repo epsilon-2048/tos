@@ -14,9 +14,9 @@ public interface StudentMapper {
     int delete(@Param("sid") String sid);
 
     @Insert("INSERT INTO `tos_student`(`sid`,`sname`,`sex`,`cardNumber`,`password`,`department`,`phone`) VALUES(#{sid},#{sname},#{sex},#{cardNumber},#{password},#{department},#{phone});")
-    int insert(Student student) throws Exception;
+    int insert(Student student);
 
     @Update("UPDATE `tos_student` SET `sname`=#{sname},`sex`=#{sex},`cardNumber`=#{cardNumber},`password`=#{password},`department`=#{department},`phone`=#{phone} WHERE sid = #{sid}")
-    int update(Student student)throws Exception;;
+    int update(Student student);
 
 }

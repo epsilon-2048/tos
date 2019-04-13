@@ -16,8 +16,8 @@ public interface FillQuestionMapper {
     int delete(@Param("fid") int fid);
 
     @Insert("INSERT INTO `tos_fillquestion`(`fquestion`,`fanswer`) VALUES(#{fquestion},#{fanswer});")
-    int insert(Fillquestion fillquestion)throws Exception;
+    int insert(Fillquestion fillquestion);
 
     @Update("UPDATE `tos_fillquestion` SET `fquestion`=#{fquestion},`fanswer`=#{fanswer} WHERE `fid` = #{fid}")
-    int update(Fillquestion fillquestion)throws Exception;;
+    int update(Fillquestion fillquestion);
 }

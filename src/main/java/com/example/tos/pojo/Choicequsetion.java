@@ -1,6 +1,8 @@
 package com.example.tos.pojo;
 
-public class Choicequsetion {
+import java.io.Serializable;
+
+public class Choicequsetion implements Serializable {
 
     private int cid;
     private String cquestion;

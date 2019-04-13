@@ -1,6 +1,8 @@
 package com.example.tos.pojo;
 
-public class Administrator {
+import java.io.Serializable;
+
+public class Administrator implements Serializable {
 
     private String adid;
     private String adname;

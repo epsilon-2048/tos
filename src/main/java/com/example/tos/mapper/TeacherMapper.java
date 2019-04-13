@@ -21,9 +21,9 @@ public interface TeacherMapper {
     int delete(@Param("tid") String tid);
 
     @Insert("INSERT INTO `tos_teacher`(`tid`,`tname`,`sex`,`cardNumber`,`password`,`title`,`phone`) VALUES(#{tid},#{tname},#{sex},#{cardNumber},#{password},#{title},#{phone});")
-    int insert(Teacher teacher)throws Exception;
+    int insert(Teacher teacher);
 
     @Update("UPDATE `tos_teacher` SET `tname`=#{tname},`sex`=#{sex},`cardNumber`=#{cardNumber},`password`=#{password},`title`=#{title},`phone`=#{phone} WHERE tid = #{tid}")
-    int update(Teacher teacher)throws Exception;;
+    int update(Teacher teacher);;
 
 }

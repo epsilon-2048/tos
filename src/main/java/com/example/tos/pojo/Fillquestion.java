@@ -1,6 +1,8 @@
 package com.example.tos.pojo;
 
-public class Fillquestion {
+import java.io.Serializable;
+
+public class Fillquestion implements Serializable {
 
     private int fid;
 

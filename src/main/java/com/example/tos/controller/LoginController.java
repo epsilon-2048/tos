@@ -20,7 +20,7 @@ import java.util.Map;
 @RequestMapping("/templates")
 public class LoginController {
 
-    @Resource
+/*    @Resource
     private TeacherMapper teacherMapper;
     @Resource
     private StudentMapper studentMapper;
@@ -70,7 +70,7 @@ public class LoginController {
             default:
                 throw new TosException(CodeEnum.ParamException);
         }
-    }
+    }*/
 
     @RequestMapping("/Test")
     public String Test(){
