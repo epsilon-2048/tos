@@ -1,13 +1,21 @@
 package com.example.tos.pojo;
 
+import com.alibaba.excel.annotation.ExcelProperty;
+import com.alibaba.excel.metadata.BaseRowModel;
+
 import java.io.Serializable;
 
-public class Fillquestion implements Serializable {
+public class Fillquestion extends BaseRowModel implements Serializable {
 
     private int fid;
 
+    @ExcelProperty(value = "问题", index = 0)
     private String fquestion;
+    @ExcelProperty(value = "答案", index = 1)
     private String fanswer;
+
+    public Fillquestion() {
+    }
 
     public Fillquestion(String fquestion, String fanswer) {
         this.fquestion = fquestion;

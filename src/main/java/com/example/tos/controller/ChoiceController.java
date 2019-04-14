@@ -5,11 +5,10 @@ import com.example.tos.pojo.Choicequsetion;
 import com.example.tos.result.Result;
 import com.example.tos.result.ResultUtil;
 import com.example.tos.service.ChoiceQuestionService;
+import com.example.tos.service.ReadService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -22,10 +21,26 @@ public class ChoiceController {
     @Resource
     private ChoiceQuestionService choiceQuestionService;
 
+    @Resource
+    private ReadService readService;
+
     @RequestMapping(value = "/insertChoicequsetion",method = RequestMethod.POST)
     @ResponseBody
     public Result insertChoice(@RequestBody Choicequsetion choicequsetion) {
         choiceQuestionService.insert(choicequsetion);
+        return ResultUtil.sussess();
+    }
+
+    @RequestMapping(value = "/insertChoiceByExcel", method = RequestMethod.POST)
+    @ResponseBody
+    public Result insertChoiceByExcel(@RequestParam("file") MultipartFile file) {
+        List<Object> datas = readService.excelReadService(file, Choicequsetion.class);
+        Choicequsetion choicequsetion;
+        for (Object data:
+                datas) {
+            choicequsetion = data instanceof Choicequsetion ? ((Choicequsetion) data) : null;
+            if (choicequsetion != null) choiceQuestionService.insert((Choicequsetion)data);
+        }
         return ResultUtil.sussess();
     }
 
@@ -58,5 +73,7 @@ public class ChoiceController {
         choiceQuestionService.delete(Integer.valueOf(id));
         return ResultUtil.sussess();
     }
+
+
 
 }

@@ -1,16 +1,30 @@
 package com.example.tos.pojo;
 
+import com.alibaba.excel.annotation.ExcelProperty;
+import com.alibaba.excel.metadata.BaseRowModel;
+
 import java.io.Serializable;
 
-public class Choicequsetion implements Serializable {
+
+public class Choicequsetion extends BaseRowModel implements Serializable {
 
     private int cid;
+    @ExcelProperty(value = "问题", index = 0)
     private String cquestion;
+    @ExcelProperty(value = "选项A", index = 1)
     private String choicea;
+    @ExcelProperty(value = "选项B", index = 2)
     private String choiceb;
+    @ExcelProperty(value = "选项C", index = 3)
     private String choicec;
+    @ExcelProperty(value = "选项D", index = 4)
     private String choiced;
+    @ExcelProperty(value = "答案", index = 5)
     private String canswer;
+
+    //需要无参构造函数
+    public Choicequsetion() {
+    }
 
     public Choicequsetion(int cid, String cquestion, String choicea, String choiceb, String choicec, String choiced, String canswer) {
         this.cid = cid;

@@ -4,11 +4,10 @@ import com.example.tos.pojo.Fillquestion;
 import com.example.tos.result.Result;
 import com.example.tos.result.ResultUtil;
 import com.example.tos.service.FillQuestionService;
+import com.example.tos.service.ReadService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.*;
@@ -20,12 +19,29 @@ public class FillController {
     @Resource
     private FillQuestionService fillQuestionService;
 
+    @Resource
+    private ReadService readService;
+
     @RequestMapping(value = "/insertFillquestion",method = RequestMethod.POST)
     @ResponseBody
     public Result insertFillq(@RequestBody Fillquestion fillquestion) {
         fillQuestionService.insert(fillquestion);
         return ResultUtil.sussess();
     }
+
+    @RequestMapping(value = "/insertFillByExcel", method = RequestMethod.POST)
+    @ResponseBody
+    public Result insertFillByExcel(@RequestParam("file") MultipartFile file) {
+        List<Object> datas = readService.excelReadService(file, Fillquestion.class);
+        Fillquestion fillquestion;
+        for (Object data:
+                datas) {
+            fillquestion = data instanceof Fillquestion ? ((Fillquestion) data) : null;
+            if (fillquestion != null) fillQuestionService.insert(fillquestion);
+        }
+        return ResultUtil.sussess();
+    }
+
 
     @RequestMapping(value = "/selectAllFillQuestion",method = RequestMethod.POST)
     @ResponseBody

@@ -5,6 +5,7 @@
     <title>各个功能的测试</title>
 
     <script type="application/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="/js/ajaxfileupload.js"></script>
     <script>
         //统一使用ajax与后端交互
         //页面放在templates不能直接访问，需要后台跳转，如Test.html,要访问http://localhost:8080/templates/Test。
@@ -108,6 +109,20 @@
                 }
             });
         }
+        function upload() {
+            var fileId = event.target.id;
+            $.ajaxFileUpload({
+                url: "/templates/insertChoiceByExcel",
+                type: "post",
+                secureuri: false,
+                fileElementId: fileId,
+                dataType: "json",
+                success: function (data) {
+                    alert(JSON.stringify(data));
+                }
+            });
+
+        }
     </script>
 </head>
 <body>
@@ -116,9 +131,10 @@
     <button onclick="selectStu('123')">学生单条查询测试</button>
     <button onclick="dStu('12')">学生单条删除测试</button>
     <button onclick="iStu()">学生单条插入测试</button>
+    <input type="file" id="file" name="file" multiple="multiple" value="上传excel文件" onchange="upload()"/>
     <button onclick="uStu()">学生单条更新测试</button>
     <button onclick="saChoi()">选择题查询所有测试</button>
-    <button onclick="saNChoi('20')">选择题随机n条查询测试(数据库题数不够)</button>
+    <button onclick="saNChoi('2000')">选择题随机n条查询测试(数据库题数不够)</button>
     <button onclick="saNChoi('10')">选择题随机n条查询测试</button>
 <a href="/index.html">跳转测试</a>
 
